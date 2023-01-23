@@ -1,1 +1,4 @@
-fastapi
+pandas
+bs4
+cloudscraper
+random

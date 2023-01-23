@@ -121,7 +121,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         info = scraper.get(car_of_the_day).text
         soup = BeautifulSoup(info, "html.parser")
         body = soup.find("div", {"id": "verions"})
-        car_name = soup.find("div", {"class": "page_title_text"}).text
+        car_name = body.find("div", {"class": "page_title_text"}).text
         car_name = car_name.replace('Specs', '').strip()
         car_name = car_name.replace(manufacturer, '').strip()
         production_years = re.findall('Production years:(.*?)<i', info)[0]

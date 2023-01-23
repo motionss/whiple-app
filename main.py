@@ -64,7 +64,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         info = scraper.get(car_of_the_day).text
         soup = BeautifulSoup(info, "html.parser")
         body = soup.find("div", {"class": "right_column"})
-        print("models = " + str(soup))
         if body.text == '\n':
             print("No versions available")
             info = scraper.get(car_of_the_day).text

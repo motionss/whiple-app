@@ -87,10 +87,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             info = scraper.get(link + next_car).text
             soup = BeautifulSoup(info, "html.parser")
             next_car_name = soup.find("span", {"itemprop": "name"}).text
-            table1 = pd.read_html(info)[0]
-            table2 = pd.read_html(info)[3]
+            table1 = pd.read_html(info, flavor='html5lib')[0]
+            table2 = pd.read_html(info, flavor='html5lib')[3]
             if 'Top Speed :' not in table2[0].keys():
-                table2 = pd.read_html(info)[3]
+                table2 = pd.read_html(info, flavor='html5lib')[3]
             engine = table1.loc[table1[0] ==
                                 'Engine type - Number of cylinders :', 1]
             engine = engine.values[0]
@@ -138,10 +138,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         info = scraper.get(link + next_car).text
         soup = BeautifulSoup(info, "html.parser")
         next_car_name = soup.find("span", {"itemprop": "name"}).text
-        table1 = pd.read_html(info)[0]
-        table2 = pd.read_html(info)[3]
+        table1 = pd.read_html(info, flavor='html5lib')[0]
+        table2 = pd.read_html(info, flavor='html5lib')[3]
         if 'Top Speed :' not in table2[0].keys():
-            table2 = pd.read_html(info)[3]
+            table2 = pd.read_html(info, flavor='html5lib')[3]
         engine = table1.loc[table1[0] ==
                             'Engine type - Number of cylinders :', 1]
         engine = engine.values[0]

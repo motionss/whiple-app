@@ -62,6 +62,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
         car_of_the_day = random.choice(models)
 
+        print("1 = " + car_of_the_day)
+
         info = scraper.get(car_of_the_day).text
         soup = BeautifulSoup(info, "html.parser")
         body = soup.find("div", {"class": "right_column"})
@@ -118,6 +120,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             versions = [link + version for version in versions]
             car_of_the_day = random.choice(versions)
 
+        print("2 = " + car_of_the_day)
         info = scraper.get(car_of_the_day).text
         soup = BeautifulSoup(info, "html.parser")
         body = soup.find("div", {"id": "versions"})

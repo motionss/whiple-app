@@ -112,9 +112,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             car_image = car_image.replace('/', '')
             print('termine en el if')
         else:
-            print("versions = " + str(body))
             versions = body.find_all(
                 "a", {"class": "col-md-3 col-sm-4 col-xs-4 col-4"})
+            print("versions = " + versions)
             versions = [version.get("href") for version in versions]
             versions = [link + version for version in versions]
             car_of_the_day = random.choice(versions)

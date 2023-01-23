@@ -67,7 +67,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         info = scraper.get(car_of_the_day).text
         soup = BeautifulSoup(info, "html.parser")
         body = soup.find("div", {"class": "right_column"})
-        if body.text != '\n':
+        if body is not None:
             print("Versions available")
             versions = body.find_all(
                 "a", {"class": "col-md-3 col-sm-4 col-xs-4 col-4"})

@@ -64,6 +64,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         info = scraper.get(car_of_the_day).text
         soup = BeautifulSoup(info, "html.parser")
         body = soup.find("div", {"class": "right_column"})
+        print("models = " + str(soup))
         if body.text == '\n':
             print("No versions available")
             info = scraper.get(car_of_the_day).text
@@ -111,6 +112,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             car_image = car_image.replace('/', '')
             print('termine en el if')
         else:
+            print("versions = " + str(body))
             versions = body.find_all(
                 "a", {"class": "col-md-3 col-sm-4 col-xs-4 col-4"})
             versions = [version.get("href") for version in versions]

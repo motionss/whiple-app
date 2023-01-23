@@ -53,8 +53,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             'api_key': '40c7813f1ff48474c76edd6c38612023'
         })
         info = scraper.get(car_of_the_day).text
+        print(info)
         soup = BeautifulSoup(info, "html.parser")
-        self.wfile.write(str(soup))
+        self.wfile.write(str(soup).encode())
         # models = soup.find("div", {"class": "col-md-8 col-md-pull-4"})
         # models = models.find_all("a", {"class": "col-md-3 col-sm-4 col-xs-4 col-6"})
         # models = [model.get("href") for model in models]

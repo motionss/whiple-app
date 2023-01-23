@@ -171,7 +171,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                    'traction': traction,
                    'top_speed': top_speed
                }}
-        self.wfile.write(car.encode())
+        self.wfile.write(car)
 
 
 port = int(os.getenv('PORT', 8080))

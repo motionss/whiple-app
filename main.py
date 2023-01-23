@@ -114,10 +114,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         else:
             versions = body.find_all(
                 "a", {"class": "col-md-3 col-sm-4 col-xs-4 col-4"})
-            p = []
-            for x in p:
-                p.append(str(x))
-            print("versions = " + str(x))
             versions = [version.get("href") for version in versions]
             versions = [link + version for version in versions]
             car_of_the_day = random.choice(versions)

@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import re
 import cloudscraper
 import random
+import json
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -171,7 +172,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                    'traction': traction,
                    'top_speed': top_speed
                }}
-        self.wfile.write(car)
+        self.wfile.write(json.dumps(car).encode('utf-8'))
 
 
 port = int(os.getenv('PORT', 8080))

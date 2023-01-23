@@ -53,7 +53,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             'api_key': '40c7813f1ff48474c76edd6c38612023'
         })
         info = scraper.get(car_of_the_day).text
-        soup = BeautifulSoup(info, "html.parser")
+        soup = BeautifulSoup(info, parser="html.parser")
         models = soup.find("div", {"class": "col-md-8 col-md-pull-4"})
         models = models.find_all(
             "a", {"class": "col-md-3 col-sm-4 col-xs-4 col-6"})
@@ -65,7 +65,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         print("1 = " + car_of_the_day)
 
         info = scraper.get(car_of_the_day).text
-        soup = BeautifulSoup(info, "html.parser")
+        soup = BeautifulSoup(info, parser="html.parser")
         body = soup.find("div", {"class": "right_column"})
         if body is not None:
             print("Versions available")
@@ -78,9 +78,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             print("2 = " + car_of_the_day)
 
             info = scraper.get(car_of_the_day).text
-            soup = BeautifulSoup(info, "html.parser")
+            soup = BeautifulSoup(info, parser="html.parser")
 
-        body = soup.find("div", {"id": "verions"})
+        body = soup.find(id="verions")
         car_name = body.find("div", {"class": "page_title_text"}).text
         car_name = car_name.replace('Specs', '').strip()
         car_name = car_name.replace(manufacturer, '').strip()
@@ -97,7 +97,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 shorter_car = i
         next_car = shorter_car
         info = scraper.get(link + next_car).text
-        soup = BeautifulSoup(info, "html.parser")
+        soup = BeautifulSoup(info, parser="html.parser")
         next_car_name = soup.find("span", {"itemprop": "name"}).text
         table1 = pd.read_html(info, flavor='html5lib')[0]
         table2 = pd.read_html(info, flavor='html5lib')[3]
@@ -111,13 +111,13 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         traction = traction.values[0]
         top_speed = table2.loc[table2[0] == 'Top Speed :', 1]
         top_speed = top_speed.values[0]
-        gallery = soup.find("div", {"id": "car_image"})
+        gallery = soup.find(id="car_image")
         gallery = gallery.find("a")['href']
         info = scraper.get(link + gallery).text
-        soup = BeautifulSoup(info, "html.parser")
+        soup = BeautifulSoup(info, parser="html.parser")
         car_image_link = soup.find("a", {"class": "tol"}).get("href")
         info = scraper.get(car_image_link)
-        soup = BeautifulSoup(info.text, "html.parser")
+        soup = BeautifulSoup(info.text, parser="html.parser")
         car_image = soup.find("div", {"class": "swiper-slide"})
         car_image = car_image.find("img").get("src")
         car_image = car_image.replace('/', '')
